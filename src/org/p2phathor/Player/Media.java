@@ -7,5 +7,7 @@ import java.io.InputStream;
  */
 public interface Media {
     public InputStream getInputStream();
+    public String getName();
+    public String getPath();
 
 }
