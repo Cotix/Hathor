@@ -2,8 +2,9 @@ package org.p2phathor.Player;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+import org.p2phathor.util.log.Log;
+import org.p2phathor.util.log.LogLevel;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class MediaPlayer {
     public void play() {
         if (playList.size() > 0) {
             try {
-                System.out.println("player being made");
+                Log.log("player being made", LogLevel.VERBOSE);
                 currentPlayer = new AdvancedPlayer(playList.get(0).getInputStream());
-                System.out.println("player made");
+                Log.log("player made", LogLevel.VERBOSE);
                 currentPlayer.play();
                 //System.out.println(currentPlayer.isComplete());
             } catch (JavaLayerException e) {
