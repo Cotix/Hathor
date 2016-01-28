@@ -1,5 +1,8 @@
 package org.p2phathor.Player;
 
+import org.p2phathor.util.log.Log;
+import org.p2phathor.util.log.LogLevel;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +24,12 @@ public class LocalPath implements Path {
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
-
-            System.out.println(file.getName());
-
             String name = file.getName();
+            String[] splitted = name.split("\\.");
 
-            System.out.println(name);
-
-            if (name.contains("mp3")) {                                         //Todo: fix this, split(".") did not seem to work for me
+            if (splitted.length > 0 && splitted[splitted.length-1].equals("mp3")) {
                 result.add(new MPEG(file.getName(), this));
-                System.out.println("this one is gathered!");
+                Log.log("Added " + file.getName(), LogLevel.INFO);
             }
         }
         return result;
