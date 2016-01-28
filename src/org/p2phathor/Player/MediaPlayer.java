@@ -14,10 +14,10 @@ import java.util.Scanner;
  * Created by Jasper on 27-1-2016.
  */
 public class MediaPlayer {
-    List<Media> playList = new ArrayList<Media>();
-    AdvancedPlayer currentPlayer;
-    List<Path> pathList = new ArrayList<Path>();
-    List<Media> allMedia = new ArrayList<Media>();
+    private List<Media> playList = new ArrayList<Media>();
+    private AdvancedPlayer currentPlayer;
+    private List<Path> pathList = new ArrayList<Path>();
+    private List<Media> allMedia = new ArrayList<Media>();
 
     public void addToPlayList(Media m) {
         playList.add(m);
@@ -34,6 +34,10 @@ public class MediaPlayer {
                 e.printStackTrace();
             }
         }
+    }
+
+    public List<Media> getAllMedia() {
+        return allMedia;
     }
 
     public void addPath(String path) {
@@ -57,34 +61,5 @@ public class MediaPlayer {
             result += "\n";
         }
         return result;
-    }
-
-
-    public static void main(String[] args) {
-        MediaPlayer mp = new MediaPlayer();
-        String input = "";
-        Scanner in = new Scanner(System.in);
-        while (input != "quit") {
-            System.out.println("Please give some input:");
-            input = in.nextLine();
-            String[] splitted = input.split(" ");
-            if (splitted[0].equals("setPath")) {
-                mp.addPath(splitted[1]);
-                System.out.println("Path " + splitted[1] + " set!");
-            }
-            if (splitted[0].equals("display")) {
-                System.out.println(mp.displayMedia());
-            }
-            if (splitted[0].equals("play")) {
-                String mediaName = input.substring(5, input.length());
-                for (Media media : mp.allMedia) {
-                    if (media.getName().equals(mediaName)) {
-                        mp.addToPlayList(media);
-                        mp.play();
-                        break;
-                    }
-                }
-            }
-        }
     }
 }
