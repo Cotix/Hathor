@@ -1,7 +1,7 @@
 package org.p2phathor;
 
 import org.p2phathor.Player.Media;
-import org.p2phathor.Player.MediaPlayer;
+import org.p2phathor.Player.MediaLibrary;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
 
@@ -10,10 +10,11 @@ import java.util.Scanner;
 /**
  * Created by cotix on 28-1-16.
  */
+/**
 public class Main {
     public static void main(String[] args) {
         Log.enableAllLevels();
-        MediaPlayer mp = new MediaPlayer();
+        MediaLibrary mp = new MediaLibrary();
         String input = "";
         Scanner in = new Scanner(System.in);
         while (input != "quit") {
@@ -40,3 +41,4 @@ public class Main {
         }
     }
 }
+ **/
