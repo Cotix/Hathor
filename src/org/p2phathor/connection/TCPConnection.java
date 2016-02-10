@@ -40,7 +40,6 @@ public class TCPConnection implements Connection {
         }
     }
 
-    @Override
     public boolean send(Packet packet) {
         if (!isConnected) {
             return false;
@@ -58,12 +57,10 @@ public class TCPConnection implements Connection {
         return true;
     }
 
-    @Override
     public Packet recv() {
         return packetQueue.poll();
     }
 
-    @Override
     public void disconnect() {
         if (isConnected) {
             isConnected = false;
@@ -76,12 +73,10 @@ public class TCPConnection implements Connection {
         }
     }
 
-    @Override
     public boolean isConnected() {
         return isConnected;
     }
 
-    @Override
     public void run() {
         while (isConnected) {
             try {
