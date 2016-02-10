@@ -87,12 +87,16 @@ public class Console {
                 break;
             }
         }
-
+        activePlayer = null;
         for (MediaPlayer mp : allPlayers) {
-            if (mp instanceof MP3Player) {
+            if (mp.canPlay(songToPlay)) {
                 activePlayer = mp;
                 break;
             }
+        }
+        if (activePlayer == null) {
+            Log.log("Can not find a suitable player for this media type!", LogLevel.ERROR);
+            return;
         }
         if (songToPlay != null) {
             activePlayer.giveMedia(songToPlay);

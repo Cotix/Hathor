@@ -8,4 +8,5 @@ public interface MediaPlayer {
     void pause();
     void stop();
     void giveMedia(Media media);
+    boolean canPlay(Media media);
 }

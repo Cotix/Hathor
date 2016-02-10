@@ -21,6 +21,13 @@ public class MP3Player extends Thread implements MediaPlayer {
         stream = media.getInputStream();
     }
 
+    @Override
+    public boolean canPlay(Media media) {
+        if (media instanceof MPEG) return true;
+
+        return false;
+    }
+
     public void play() {
         if (paused) {
             paused = !paused;
