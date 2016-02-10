@@ -16,6 +16,7 @@ public class MP3Player extends Thread implements MediaPlayer {
     AdvancedPlayer thisPlayer;
     InputStream stream;
     boolean paused = false;
+    Thread currentThread;
 
     public void giveMedia(Media media) {
         stream = media.getInputStream();
@@ -29,43 +30,37 @@ public class MP3Player extends Thread implements MediaPlayer {
     }
 
     public void play() {
-        if (paused) {
-            paused = !paused;
-        } else {
-            this.start();
-        }
+        this.start();
     }
 
 
     public void pause() {
-        paused = !paused;
+        thisPlayer.close();
+        try {
+            currentThread.join();
+        } catch (InterruptedException e) {
+            Log.log("InterruptedException while trying to shut the MP3PlayerThread down", LogLevel.ERROR);
+        }
     }
 
     public void stopPlayer() {
-
+        thisPlayer.close();
+        try {
+            currentThread.join();
+        } catch (InterruptedException e) {
+            Log.log("InterruptedException while trying to shut the MP3PlayerThread down", LogLevel.ERROR);
+        }
     }
 
     public void run() {
         System.out.println("Thread running");
+        currentThread = this;
         try {
             thisPlayer = new AdvancedPlayer(stream);
         } catch (JavaLayerException e) {
             Log.log(e.getMessage(), LogLevel.ERROR);
         }
         System.out.println("playing");                      //Todo: implement the possibility to pause, will have to look into the library further
-        /**
-        playing:
-        try {
-            boolean ended;
-            int i = 0;
-            while (!paused) {
-                thisPlayer.play(0+i, 1+i);
-                i += 1;
-                System.out.println("in while loop of playing");
-
-            }
-            System.out.println("Stopped playing");
-         **/
         try {
             thisPlayer.play();
         } catch (JavaLayerException e) {
