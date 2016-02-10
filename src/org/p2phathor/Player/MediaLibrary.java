@@ -25,16 +25,15 @@ public class MediaLibrary {
     }
 
     public void addPath(String path) {
-        pathList.add(new LocalPath(path));
-        allMedia = gatherAllMedia();
+        LocalPath newPath = new LocalPath(path);
+        pathList.add(newPath);
+        allMedia.addAll(newPath.gatherMedia());
     }
 
     public ArrayList<Media> gatherAllMedia() {
         ArrayList<Media> result = new ArrayList<Media>();
         for (Path path : pathList) {
-            for (Media media : path.gatherMedia()) {
-                result.add(media);
-            }
+            result.addAll(path.gatherMedia());
         }
         return result;
     }
