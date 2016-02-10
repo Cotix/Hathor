@@ -1,11 +1,9 @@
 package org.p2phathor.Player;
 
-import com.sun.deploy.util.StringUtils;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -80,20 +78,20 @@ public class Console {
         }
         System.out.println("Songname: "+ songName);
         List<Media> allMedia = mediaLib.getAllMedia();
-        medialoop:
+
         for (Media media : allMedia) {
             System.out.println("Medianame: "+ media.getName());
             if (songName.equals(media.getName())) {
                 System.out.println("Medianame is the same as Songname!");
                 songToPlay = media;
-                break medialoop;
+                break;
             }
         }
-        mediaplayerloop:
+
         for (MediaPlayer mp : allPlayers) {
             if (mp instanceof MP3Player) {
                 activePlayer = mp;
-                break mediaplayerloop;
+                break;
             }
         }
         if (songToPlay != null) {
