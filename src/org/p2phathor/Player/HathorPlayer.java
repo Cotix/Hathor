@@ -50,6 +50,10 @@ public class HathorPlayer {
         activePlayer.pause();
     }
 
+    public void unpause() {
+        activePlayer.unpause();
+    }
+
     public void addPath(String path) {
         mediaLibrary.addPath(path);
     }

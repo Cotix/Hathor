@@ -46,6 +46,10 @@ public class ConsoleView implements  PlayerView{
         player.pause();
     }
 
+    public void commandUnpause() {
+        player.unpause();
+    }
+
     public void commandHelp() {
         System.out.println("help provided");
     }
@@ -89,6 +93,9 @@ public class ConsoleView implements  PlayerView{
                 case "quit":
                     System.out.println("quit");
                     commandQuit();
+                    break;
+                case "unpause":
+                    commandUnpause();
                     break;
                 case "setPath":
                     System.out.println("setPath");

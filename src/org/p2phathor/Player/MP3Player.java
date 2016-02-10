@@ -2,24 +2,23 @@ package org.p2phathor.Player;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.PlaybackListener;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
 
-import java.io.IOError;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * Created by Jasper on 30-1-2016.
  */
 public class MP3Player extends Thread implements MediaPlayer {
-    AdvancedPlayer thisPlayer;
-    InputStream stream;
-    boolean paused = false;
-    Thread currentThread;
-
+    private AdvancedPlayer player;
+    private Media media;
+    private boolean paused = false;
+    private static int pausedOnFrame;
     public void giveMedia(Media media) {
-        stream = media.getInputStream();
+        this.media = media;
     }
 
     @Override
@@ -29,41 +28,48 @@ public class MP3Player extends Thread implements MediaPlayer {
     }
 
     public void play() {
+        pausedOnFrame = 0;
         this.start();
     }
 
 
     public void pause() {
-        thisPlayer.close();
-        try {
-            currentThread.join();
-        } catch (InterruptedException e) {
-            Log.log("InterruptedException while trying to shut the MP3PlayerThread down", LogLevel.ERROR);
-        }
+        paused = true;
+        player.stop();
     }
 
-    public void stopPlayer() {
-        thisPlayer.close();
-        try {
-            currentThread.join();
-        } catch (InterruptedException e) {
-            Log.log("InterruptedException while trying to shut the MP3PlayerThread down", LogLevel.ERROR);
-        }
+    public void unpause() {
+        paused = false;
     }
 
     public void run() {
-        System.out.println("Thread running");
-        currentThread = this;
-        try {
-            thisPlayer = new AdvancedPlayer(stream);
-        } catch (JavaLayerException e) {
-            Log.log(e.getMessage(), LogLevel.ERROR);
-        }
-        System.out.println("playing");                      //Todo: implement the possibility to pause, will have to look into the library further
-        try {
-            thisPlayer.play();
-        } catch (JavaLayerException e) {
-            Log.log(e.getMessage(), LogLevel.ERROR);
+        while (true) {
+            if (paused == false) {
+                try {
+                    player = new AdvancedPlayer(media.getInputStream());
+                    player.setPlayBackListener(new PlaybackListener() {
+                        @Override
+                        public void playbackFinished(PlaybackEvent event) {
+                            pausedOnFrame = event.getFrame();
+                            System.out.println(event.getFrame());
+                        }
+                    });
+                } catch (JavaLayerException e) {
+                    Log.log(e.getMessage(), LogLevel.ERROR);
+                }
+
+                try {
+                    player.play(pausedOnFrame, Integer.MAX_VALUE);
+                } catch (JavaLayerException e) {
+                    Log.log(e.getMessage(), LogLevel.ERROR);
+                }
+            } else {
+                try {
+                    this.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

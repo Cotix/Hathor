@@ -7,6 +7,7 @@ public interface MediaPlayer {
     void play();
     void pause();
     void stop();
+    void unpause();
     void giveMedia(Media media);
     boolean canPlay(Media media);
 }
