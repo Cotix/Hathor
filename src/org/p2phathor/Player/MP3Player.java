@@ -25,8 +25,7 @@ public class MP3Player extends Thread implements MediaPlayer {
     @Override
     public boolean canPlay(Media media) {
         if (media instanceof MPEG) return true;
-
-        return false;
+        return true;
     }
 
     public void play() {

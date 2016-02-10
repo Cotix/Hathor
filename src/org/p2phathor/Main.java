@@ -1,44 +1,20 @@
 package org.p2phathor;
 
-import org.p2phathor.Player.Media;
-import org.p2phathor.Player.MediaLibrary;
+import org.p2phathor.Player.HathorPlayer;
 import org.p2phathor.util.log.Log;
-import org.p2phathor.util.log.LogLevel;
+import org.p2phathor.view.ConsoleView;
+import org.p2phathor.view.PlayerView;
 
-import java.util.Scanner;
 
 /**
  * Created by cotix on 28-1-16.
  */
-/**
+
 public class Main {
     public static void main(String[] args) {
         Log.enableAllLevels();
-        MediaLibrary mp = new MediaLibrary();
-        String input = "";
-        Scanner in = new Scanner(System.in);
-        while (input != "quit") {
-            Log.log("Please give some input:", LogLevel.HIGHEST);
-            input = in.nextLine();
-            String[] splitted = input.split(" ");
-            if (splitted[0].equals("setPath")) {
-                mp.addPath(splitted[1]);
-                Log.log("Path " + splitted[1] + " set!", LogLevel.HIGHEST);
-            }
-            if (splitted[0].equals("display")) {
-                Log.log(mp.displayMedia(), LogLevel.HIGHEST);
-            }
-            if (splitted[0].equals("play")) {
-                String mediaName = input.substring(5, input.length());
-                for (Media media : mp.getAllMedia()) {
-                    if (media.getName().equals(mediaName)) {
-                        mp.addToPlayList(media);
-                        mp.play();
-                        break;
-                    }
-                }
-            }
-        }
+        HathorPlayer player = new HathorPlayer();
+        PlayerView view = new ConsoleView(player);
+        view.run();
     }
 }
- **/
