@@ -26,7 +26,6 @@ public class LocalPath implements Path {
         for (File file : listOfFiles) {
             String name = file.getName();
             String[] splitted = name.split("\\.");
-
             if (splitted.length > 0 && splitted[splitted.length-1].equals("mp3")) {
                 result.add(new MPEG(file.getName(), this));
                 Log.log("Added " + file.getName(), LogLevel.INFO);

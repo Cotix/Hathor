@@ -26,7 +26,6 @@ public class ConsoleView implements  PlayerView{
                 songName += " ";
             }
         }
-        System.out.println("Songname: "+ songName);
         List<Media> allMedia = player.getAllMedia();
         for (Media media : allMedia) {
             if (songName.equals(media.getName())) {
