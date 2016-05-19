@@ -13,7 +13,7 @@ import java.io.InputStream;
 /**
  * Created by Jasper on 23-2-2016.
  */
-public class newMP3Player implements MediaPlayer {
+public class NewMP3Player implements MediaPlayer {
 
     private Media currentSong;
     private AudioStream currentAudioStream;

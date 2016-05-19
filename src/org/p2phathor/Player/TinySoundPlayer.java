@@ -9,20 +9,18 @@ import java.util.ArrayList;
  * Created by Jasper on 29-4-2016.
  */
 public class TinySoundPlayer implements MediaPlayer {
-    TinySound tinySound;
-    Media currentSong;
-    Music currentMusic;
+    private Media currentSong;
+    private Music currentMusic;
 
     public TinySoundPlayer() {
-        tinySound = new TinySound();
-        tinySound.init();
+        TinySound.init();
     }
 
 
     public void play() {
         if (currentSong != null) {
-            currentMusic = tinySound.loadMusic(currentSong.getPath());
-            currentMusic.play(false);
+            currentMusic = TinySound.loadMusic(currentSong.getPath() + "/" + currentSong.getName());
+            currentMusic.play(true);
         }
     }
     public void stop() {
@@ -35,7 +33,7 @@ public class TinySoundPlayer implements MediaPlayer {
         currentMusic.pause();
     }
     public void giveMedia(Media media) {
-
+        currentSong = media;
     }
     public void unpause() {
         currentMusic.play(false);

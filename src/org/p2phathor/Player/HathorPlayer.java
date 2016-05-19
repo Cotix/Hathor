@@ -1,5 +1,6 @@
 package org.p2phathor.Player;
 
+import org.p2phathor.Player.zoomplayer.ZoomMP3Player;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
 
