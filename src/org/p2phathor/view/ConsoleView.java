@@ -1,5 +1,6 @@
 package org.p2phathor.view;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.p2phathor.Player.*;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
@@ -17,7 +18,7 @@ public class ConsoleView implements  PlayerView{
         player = p;
     }
 
-    public void commandPlay(String[] splitted) {
+    public void commandPlaySong(String[] splitted) {
         String songName = "";
         Media songToPlay = null;
         for (int i = 1; i < splitted.length; i++) {
@@ -34,6 +35,13 @@ public class ConsoleView implements  PlayerView{
             }
         }
         player.play(songToPlay);
+    }
+
+    public void commandPlay() {
+        player.play();
+    }
+    public void commandStop() {
+        player.stop();
     }
 
     public void commandDisplay() {
@@ -74,24 +82,25 @@ public class ConsoleView implements  PlayerView{
             System.out.println(splitted[0]);
             switch (splitted[0]) {
                 case "play":
-                    System.out.println("play");
                     if (splitted.length > 1) {
-                        commandPlay(splitted);
+                        commandPlaySong(splitted);
+                    } else if (splitted.length == 1) {
+                        commandPlay();
                     } else {
                         Log.log("Play was entered without entering a song name", LogLevel.VERBOSE);
                         commandHelp();
                     }
                     break;
                 case "display":
-                    System.out.println("display");
                     commandDisplay();
                     break;
                 case "pause":
-                    System.out.println("pause");
                     commandPause();
                     break;
+                case "stop":
+                    commandStop();
+                    break;
                 case "quit":
-                    System.out.println("quit");
                     commandQuit();
                     break;
                 case "unpause":
@@ -107,10 +116,8 @@ public class ConsoleView implements  PlayerView{
                     }
                     break;
                 default:
-                    System.out.println("default");
                     commandHelp();
             }
         }
     }
 }
-

@@ -16,7 +16,11 @@ public class HathorPlayer {
 
     public HathorPlayer() {
         mediaLibrary = new MediaLibrary();
-        allPlayers.add(new MP3Player());
+        allPlayers.add(new TinySoundPlayer());
+    }
+
+    public void play() {
+        activePlayer.play();
     }
 
     public boolean play(Media media) {
@@ -48,6 +52,9 @@ public class HathorPlayer {
 
     public void pause() {
         activePlayer.pause();
+    }
+    public void stop() {
+        activePlayer.stop();
     }
 
     public void unpause() {
