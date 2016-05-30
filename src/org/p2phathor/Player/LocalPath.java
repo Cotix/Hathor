@@ -1,5 +1,7 @@
 package org.p2phathor.Player;
 
+import org.p2phathor.Player.MediaExtensions.MPEG;
+import org.p2phathor.Player.MediaExtensions.WAV;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
 
@@ -28,6 +30,10 @@ public class LocalPath implements Path {
             String[] splitted = name.split("\\.");
             if (splitted.length > 0 && splitted[splitted.length-1].equals("mp3")) {
                 result.add(new MPEG(file.getName(), this));
+                Log.log("Added " + file.getName(), LogLevel.INFO);
+            }
+            if (splitted.length > 0 && splitted[splitted.length-1].equals("wav")) {
+                result.add(new WAV(file.getName(), file.getPath()));
                 Log.log("Added " + file.getName(), LogLevel.INFO);
             }
         }

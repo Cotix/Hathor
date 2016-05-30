@@ -3,6 +3,7 @@ package org.p2phathor.Player;
 import kuusisto.tinysound.Music;
 import kuusisto.tinysound.TinySound;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -18,16 +19,25 @@ public class TinySoundPlayer implements MediaPlayer {
 
 
     public void play() {
+        if (!TinySound.isInitialized()) {
+            TinySound.init();
+        }
         if (currentSong != null) {
-            currentMusic = TinySound.loadMusic(currentSong.getPath() + "/" + currentSong.getName());
-            currentMusic.play(true);
+            File file = new File(currentSong.getPath());
+            currentMusic = TinySound.loadMusic(file);
+            currentMusic.play(false);
         }
     }
     public void stop() {
             currentMusic.stop();
     }
     public boolean canPlay(Media media) {
-        return (media.getName().endsWith(".mp3"));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // do nothing
+        }
+        return (media.getName().endsWith(".wav"));
     }
     public void pause() {
         currentMusic.pause();
@@ -37,5 +47,8 @@ public class TinySoundPlayer implements MediaPlayer {
     }
     public void unpause() {
         currentMusic.play(false);
+    }
+    public void quit() {
+        TinySound.shutdown();
     }
 }

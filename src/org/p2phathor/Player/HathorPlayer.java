@@ -12,12 +12,11 @@ import java.util.List;
  */
 public class HathorPlayer {
     private MediaLibrary mediaLibrary;
-    private List<MediaPlayer> allPlayers = new ArrayList<>();
+    private List<MediaPlayer> allPlayers = setAllPlayers();
     private MediaPlayer activePlayer;
 
     public HathorPlayer() {
         mediaLibrary = new MediaLibrary();
-        allPlayers.add(new TinySoundPlayer());
     }
 
     public void play() {
@@ -26,7 +25,7 @@ public class HathorPlayer {
 
     public boolean play(Media media) {
         if (activePlayer != null) {
-            activePlayer.stop();
+            activePlayer.quit();
         }
 
         activePlayer = null;
@@ -68,6 +67,15 @@ public class HathorPlayer {
 
     public List<Media> getAllMedia() {
         return mediaLibrary.getAllMedia();
+    }
+
+    public ArrayList<MediaPlayer>setAllPlayers() {
+        ArrayList<MediaPlayer> result = new ArrayList<>();
+        result.add(new TinySoundPlayer());
+        return result;
+    }
+    public void quit() {
+        activePlayer.quit();
     }
 
 }

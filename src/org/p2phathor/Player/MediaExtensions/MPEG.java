@@ -1,5 +1,7 @@
-package org.p2phathor.Player;
+package org.p2phathor.Player.MediaExtensions;
 
+import org.p2phathor.Player.Media;
+import org.p2phathor.Player.Path;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
 

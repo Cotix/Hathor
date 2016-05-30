@@ -63,12 +63,12 @@ public class ConsoleView implements  PlayerView{
     }
     public void commandQuit() {
         Log.log("System is going down!", LogLevel.WARNING);
+        player.quit();
         System.exit(0);
     }
     public void commandSetPath(String path) {
         player.addPath(path);
         Log.log("Path " + path + " set", LogLevel.VERBOSE);
-        System.out.println("Path " + path + " set!");
     }
 
     @Override
@@ -79,7 +79,6 @@ public class ConsoleView implements  PlayerView{
             System.out.println("Please give input:");
             input = in.nextLine();
             String[] splitted = input.split(" ");
-            System.out.println(splitted[0]);
             switch (splitted[0]) {
                 case "play":
                     if (splitted.length > 1) {
@@ -107,7 +106,6 @@ public class ConsoleView implements  PlayerView{
                     commandUnpause();
                     break;
                 case "setPath":
-                    System.out.println("setPath");
                     if (splitted.length == 2) {
                         commandSetPath(splitted[1]);
                     } else {

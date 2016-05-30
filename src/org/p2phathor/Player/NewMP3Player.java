@@ -68,4 +68,7 @@ public class NewMP3Player implements MediaPlayer {
     public void unpause() {
 
     }
+    public void quit() {
+        return;
+    }
 }

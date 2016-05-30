@@ -14,6 +14,9 @@ public class JAppletMP3Player implements  MediaPlayer {
 
 
     }
+    public void quit() {
+        return;
+    }
     public void pause() {
 
     }

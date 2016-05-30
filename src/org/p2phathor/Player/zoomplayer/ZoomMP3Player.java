@@ -4,13 +4,11 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
-import org.p2phathor.Player.MPEG;
+import org.p2phathor.Player.MediaExtensions.MPEG;
 import org.p2phathor.Player.Media;
 import org.p2phathor.Player.MediaPlayer;
 import org.p2phathor.util.log.Log;
 import org.p2phathor.util.log.LogLevel;
-
-import java.io.InputStream;
 
 /**
  * Created by Jasper on 30-1-2016.
@@ -74,5 +72,8 @@ public class ZoomMP3Player extends Thread implements MediaPlayer {
                 }
             }
         }
+    }
+    public void quit() {
+        return;
     }
 }
